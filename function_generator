@@ -1,6 +1,4 @@
-import subprocess
-from itertools import chain, combinations
-
+from utils import get_powerset
 
 function_file_content = \
 '''
@@ -29,22 +27,8 @@ def main():
     execution_time = end_time - start_time
     return str(execution_time)
 '''
-function_file_prefix = 'Functions/python_'
+function_file_prefix = 'Functions/python-'
 function_file_postifx ='.py'
-
-def get_powerset(in_set):
-    # Convert the input set to a list
-    in_list = list(in_set)
-    # Generate all possible subsets using combinations from itertools
-    subsets = chain.from_iterable(
-        combinations(in_list, r) for r in range(len(in_list) + 1)
-    )
-    # Convert each subset to a set
-    powerset = [set(subset) for subset in subsets]
-    powerset.remove(in_set)
-
-    powerset.remove(set())
-    return powerset
 
 def generate_functions(packages:list):
     formatted = function_file_content.format(packages = packages)
@@ -53,7 +37,7 @@ def generate_functions(packages:list):
 
 
 if __name__ == '__main__':
-    packages = {'pandas','numpy','scipy'}
+    packages = ['pandas','numpy','scipy']
     pset = get_powerset(packages)
     for p in pset:
         generate_functions(list(p))

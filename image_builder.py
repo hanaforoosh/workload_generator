@@ -1,20 +1,5 @@
 import subprocess
-from itertools import chain, combinations
-
-def get_powerset(in_set):
-    # Convert the input set to a list
-    in_list = list(in_set)
-    # Generate all possible subsets using combinations from itertools
-    subsets = chain.from_iterable(
-        combinations(in_list, r) for r in range(len(in_list) + 1)
-    )
-    # Convert each subset to a set
-    powerset = [set(subset) for subset in subsets]
-    powerset.remove(in_set)
-
-    powerset.remove(set())
-    return powerset
-
+from utils import get_powerset
 
 def run_docker_cmds(packages:list):
     additional_packages = ' '.join(packages)
@@ -26,7 +11,7 @@ def run_docker_cmds(packages:list):
     print(docker_build_cmd)
     try:
         subprocess.run(docker_build_cmd, shell=True, check=True)
-        # subprocess.run(docker_push_cmd, shell=True, check=True)
+        subprocess.run(docker_push_cmd, shell=True, check=True)
         print("Docker build completed successfully!")
 
     except subprocess.CalledProcessError as e:
@@ -34,7 +19,7 @@ def run_docker_cmds(packages:list):
         print("Error:", e)
 
 if __name__ == '__main__':
-    packages = {'pandas','numpy'}
+    packages = ['pandas','numpy']
     pset = get_powerset(packages)
     print(pset)
     for p in pset:
