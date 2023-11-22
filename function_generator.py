@@ -1,7 +1,6 @@
 from utils import get_powerset
 
-function_file_content = \
-'''
+function_file_content = """
 import importlib
 import subprocess
 import sys
@@ -26,18 +25,32 @@ def main():
     end_time = time.time()
     execution_time = end_time - start_time
     return str(execution_time)
-'''
-function_file_prefix = 'Functions/python-'
-function_file_postifx ='.py'
-
-def generate_functions(packages:list):
-    formatted = function_file_content.format(packages = packages)
-    with open(function_file_prefix+'-'.join(packages)+function_file_postifx,'w') as f:
-        print(formatted,file=f)
+"""
+function_file_prefix = "Functions/python-"
+function_file_postifx = ".py"
 
 
-if __name__ == '__main__':
-    packages = ['pandas','numpy','scipy']
+def generate_functions(packages: list):
+    formatted = function_file_content.format(packages=packages)
+    with open(
+        function_file_prefix + "-".join(packages) + function_file_postifx, "w"
+    ) as f:
+        print(formatted, file=f)
+
+
+if __name__ == "__main__":
+    packages = [
+        "requests",
+        "numpy",
+        "pandas",
+        "matplotlib",
+        "flask",
+        "scikit-learn",
+        "tensorflow",
+        "keras",
+        "pytest",
+        "django",
+    ]
     pset = get_powerset(packages)
     for p in pset:
         generate_functions(list(p))
