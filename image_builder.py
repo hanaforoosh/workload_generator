@@ -8,11 +8,13 @@ def run_docker_cmds(packages: list):
 
     docker_build_cmd = f'docker build --build-arg ADDITIONAL_PACKAGES="{additional_packages}" -t {image_name} ./Dockerfiles/'
     docker_push_cmd = f"docker push {image_name}"
+    docker_rm_cmd = f"docker rmi -f {image_name}"
 
     print(docker_build_cmd)
     try:
         subprocess.run(docker_build_cmd, shell=True, check=True)
         subprocess.run(docker_push_cmd, shell=True, check=True)
+        subprocess.run(docker_rm_cmd, shell=True, check=True)
 
     except subprocess.CalledProcessError as e:
         print("Docker build failed.")
