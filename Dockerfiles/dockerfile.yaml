@@ -1,2 +1,0 @@
-FROM fission/python-env
-RUN pip install numpy

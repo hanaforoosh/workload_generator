@@ -1,14 +1,12 @@
 createfn() {
-    if [ $# -ne 3 ]; then
+    if [ $# -ne 2 ]; then
         echo "Usage: fission_create_function <function_name> <environment> <code_file>"
         return 1
     fi
+    local function_name=$1
+    local environment=$2
 
-    local code_file=$1
-    local function_name=$2
-    local environment=$3
-
-    fission fn create --code "$code_file" --name "$function_name" --env "$environment" --ft 600
+    fission fn create --code "$function_name".py --name "$function_name" --env "$environment" --ft 9000
 }
 
 deletefn() {

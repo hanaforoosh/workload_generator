@@ -1,0 +1,3 @@
+FROM fission/python-env
+ARG ADDITIONAL_PACKAGES=""
+RUN pip install ${ADDITIONAL_PACKAGES}
