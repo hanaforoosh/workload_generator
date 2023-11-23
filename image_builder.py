@@ -3,6 +3,7 @@ from utils import get_powerset
 
 
 def run_docker_cmds(packages: list):
+    packages.sort()
     additional_packages = " ".join(packages)
     image_name = "red2pac/python-" + "-".join(packages) + ":latest"
 
@@ -12,8 +13,11 @@ def run_docker_cmds(packages: list):
 
     print(docker_build_cmd)
     try:
+        print(docker_build_cmd)
         subprocess.run(docker_build_cmd, shell=True, check=True)
+        print(docker_push_cmd)
         subprocess.run(docker_push_cmd, shell=True, check=True)
+        print(docker_rm_cmd)
         subprocess.run(docker_rm_cmd, shell=True, check=True)
 
     except subprocess.CalledProcessError as e:
@@ -22,17 +26,23 @@ def run_docker_cmds(packages: list):
 
 
 if __name__ == "__main__":
+#    packages = [
+#        "requests",
+#        "numpy",
+#        "pandas",
+#        "matplotlib",
+#        "flask",
+#        "scikit-learn",
+#        "tensorflow",
+#        "keras",
+#        "pytest",
+#        "django",
+#    ]
     packages = [
-        "requests",
         "numpy",
-        "pandas",
-        "matplotlib",
         "flask",
-        "scikit-learn",
-        "tensorflow",
-        "keras",
         "pytest",
-        "django",
+        "fastapi",
     ]
     pset = get_powerset(packages)
     for p in pset:

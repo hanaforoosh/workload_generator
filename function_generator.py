@@ -39,17 +39,23 @@ def generate_functions(packages: list):
 
 
 if __name__ == "__main__":
+#   packages = [
+#       "requests",
+#       "numpy",
+#       "pandas",
+#       "matplotlib",
+#       "flask",
+#       "scikit-learn",
+#       "tensorflow",
+#       "keras",
+#       "pytest",
+#       "django",
+#   ]
     packages = [
-        "requests",
-        "numpy",
-        "pandas",
-        "matplotlib",
-        "flask",
-        "scikit-learn",
-        "tensorflow",
-        "keras",
-        "pytest",
-        "django",
+            "numpy",
+            "flask",
+            "pytest",
+            "fastapi",
     ]
     pset = get_powerset(packages)
     for p in pset:
