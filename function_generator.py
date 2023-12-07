@@ -5,6 +5,8 @@ import importlib
 import subprocess
 import sys
 import time
+from datetime import datetime
+import subprocess
 
 def import_package(package_name):
     try:
@@ -17,6 +19,9 @@ def fixed_part():
     time.sleep(5)
 
 def main():
+    res = subprocess.run('hostname', shell=True,stdout=subprocess.PIPE,text=True)
+    print('podname:',res.stdout)
+    print('started:',datetime.now().time())
     start_time = time.time()
     packages = {packages}
     for package in packages:
@@ -24,6 +29,7 @@ def main():
     fixed_part()
     end_time = time.time()
     execution_time = end_time - start_time
+    print('finished:',datetime.now().time())
     return str(execution_time)
 """
 function_file_prefix = "Functions/python-"
@@ -39,21 +45,9 @@ def generate_functions(packages: list):
 
 
 if __name__ == "__main__":
-#   packages = [
-#       "requests",
-#       "numpy",
-#       "pandas",
-#       "matplotlib",
-#       "flask",
-#       "scikit-learn",
-#       "tensorflow",
-#       "keras",
-#       "pytest",
-#       "django",
-#   ]
     packages = [
             "numpy",
-            "flask",
+            "django",
             "pytest",
             "fastapi",
     ]
